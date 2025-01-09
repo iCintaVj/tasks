@@ -1,0 +1,76 @@
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: hidden; /* Prevent the whole column from scrolling */
+}
+
+/* Top Section: Logo */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center; /* Center the logo */
+}
+
+/* Middle Section: Task Lists */
+.task-lists {
+  flex-grow: 1;
+}
+
+.task-lists h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.task-lists-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-lists-li {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #34495e;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: left; /* Center-align text inside li */
+}
+
+.task-lists-li button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.task-lists-li:hover {
+  background-color: #1abc9c;
+}
+
+/* Bottom Section: Settings Button */
+.settings {
+  margin-top: 20px;
+  text-align: center; /* Center the settings button */
+}
+
+.settings button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.settings button:hover {
+  background-color: #16a085;
+}

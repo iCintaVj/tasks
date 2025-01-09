@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden; /* Prevent the whole column from scrolling */
+  }
+  
+.left-section {
+  flex: 1;
+  max-width: 17%;
+  background-color: #f4f4f4;
+}
+
+.right-section {
+  flex: 3;
+  background-color: #fff;
+}
+  
+  
