@@ -8,3 +8,10 @@ body {
   height: 100vh;
   overflow-y: hidden; /* Prevent the whole column from scrolling */
 }
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    overflow-y: auto; /* Allow scrolling on mobile devices */
+  }
+}

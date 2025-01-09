@@ -74,3 +74,32 @@
 .settings button:hover {
   background-color: #16a085;
 }
+
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+  .side-panel {
+    padding: 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .task-lists h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .task-lists-li {
+    margin: 8px 0;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .settings button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

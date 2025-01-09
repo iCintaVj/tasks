@@ -15,4 +15,16 @@
   background-color: #fff;
 }
   
-  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+
+    .left-section {
+      max-width: 100%;
+    }
+
+    .right-section {
+      max-width: 100%;
+    }
+  }

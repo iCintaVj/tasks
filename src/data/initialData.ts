@@ -1,27 +1,44 @@
-import { BoardData } from "../types/types.ts";
+import { TaskListType } from "../types/types.ts";
 
-export const initialData: BoardData = {
-    tasks: {
-      'task-1': { id: 'task-1', content: 'Learn TypeScript' },
-      'task-2': { id: 'task-2', content: 'Build a Kanban App' },
-      'task-3': { id: 'task-3', content: 'Test the app' },
-    },
-    columns: {
-      'column-1': {
-        id: 'column-1',
-        title: 'To Do',
-        taskIds: ['task-1', 'task-2', 'task-3'],
-      },
-      'column-2': {
-        id: 'column-2',
-        title: 'In Progress',
-        taskIds: [],
-      },
-      'column-3': {
-        id: 'column-3',
-        title: 'Done',
-        taskIds: [],
-      },
-    },
-    columnOrder: ['column-1', 'column-2', 'column-3'],
-  };
+export const initialData : TaskListType[] = [
+  {
+    name : 'Work',
+    tasks : [
+      { id: 1, name: 'Finish project', priority: 'High', dueDate: '2021-12-31', status: 'Todo' },
+      { id: 2, name: 'Email client', priority: 'Medium', dueDate: '2021-12-25', status: 'In Progress' },
+      { id: 3, name: 'Prepare report', priority: 'Low', dueDate: '2021-12-20', status: 'Completed' },
+      { id: 13, name: 'Team meeting', priority: 'High', dueDate: '2021-12-15', status: 'Todo' },
+      { id: 14, name: 'Code review', priority: 'Medium', dueDate: '2021-12-18', status: 'In Progress' },
+    ],
+  },
+  {
+    name: 'Financial',
+    tasks: [
+      { id: 4, name: 'Pay bills', priority: 'High', dueDate: '2021-12-31', status: 'Todo' },
+      { id: 5, name: 'Review budget', priority: 'Medium', dueDate: '2021-12-25', status: 'In Progress' },
+      { id: 6, name: 'Invest wisely', priority: 'Low', dueDate: '2021-12-20', status: 'Completed' },
+      { id: 15, name: 'Tax planning', priority: 'High', dueDate: '2021-12-22', status: 'Todo' },
+      { id: 16, name: 'Savings review', priority: 'Medium', dueDate: '2021-12-28', status: 'In Progress' },
+    ],
+  },
+  {
+    name: 'Self Development',
+    tasks: [
+      { id: 7, name: 'Read a book', priority: 'High', dueDate: '2021-12-31', status: 'Todo' },
+      { id: 8, name: 'Learn a new skill', priority: 'Medium', dueDate: '2021-12-25', status: 'In Progress' },
+      { id: 9, name: 'Practice meditation', priority: 'Low', dueDate: '2021-12-20', status: 'Completed' },
+      { id: 17, name: 'Attend workshop', priority: 'High', dueDate: '2021-12-19', status: 'Todo' },
+      { id: 18, name: 'Write a journal', priority: 'Medium', dueDate: '2021-12-21', status: 'In Progress' },
+    ],
+  },
+  {
+    name: 'Health',
+    tasks: [
+      { id: 10, name: 'Morning run', priority: 'High', dueDate: '2021-12-31', status: 'Todo' },
+      { id: 11, name: 'Healthy meal prep', priority: 'Medium', dueDate: '2021-12-25', status: 'In Progress' },
+      { id: 12, name: 'Yoga session', priority: 'Low', dueDate: '2021-12-20', status: 'Completed' },
+      { id: 19, name: 'Doctor appointment', priority: 'High', dueDate: '2021-12-23', status: 'Todo' },
+      { id: 20, name: 'Gym workout', priority: 'Medium', dueDate: '2021-12-26', status: 'In Progress' },
+    ],
+  }
+];
