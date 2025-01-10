@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TaskCard from '../TaskCard/TaskCard.tsx';
 import './Column.css';
-import { ColumnType } from '../../types/types.ts';
+import { ColumnProps, ColumnType } from '../../types/types.ts';
+import { dummyTasks } from '../../data/initialData.ts';
 
-const Column: React.FC<ColumnType> = ({ name, tasks }) => {
+const Column: React.FC<ColumnProps> = ({ id, name, taskListId }) => {
+
+    const [tasks, setData] = useState(dummyTasks);
+    
     return (
-        <div className="column">
+        <div className="column" id={id}>
             <h2 className="column-title">{name}</h2>
-            <div className="task-list">
-                {tasks
-                    .filter((task) => task.status === name)
-                    .map((task) => (
-                        <TaskCard
-                            key={task.id}
-                            id={task.id}
-                            name={task.name}
-                            priority={task.priority}
-                            dueDate={task.dueDate}
-                            status={task.status}
-                        />
-                    ))}
-            </div>
+                <div className="task-list">
+                    {
+                        tasks.filter((task) => task.taskListId === taskListId).filter((task) => (task.status === name)).map((task) => (
+                            <TaskCard key={task.id} {...task} />
+                        ))
+                    }
+                </div>
+            
         </div>
     );
 };

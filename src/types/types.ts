@@ -3,18 +3,31 @@ export type TaskType = {
   name: string;
   priority: 'High' | 'Medium' | 'Low';
   dueDate: string;
-  status : 'To Do' | 'In Progress' | 'Done';
+  status : 'Todo' | 'In Progress' | 'Done';
+  taskListId: string;
+  description? : string;
 };
 
-export interface ColumnType {
+export type ColumnType = {
+  id : string;
   name: string;
-  tasks : TaskType[];
+}
+
+export type ColumnProps = {
+  id : string;
+  name: string;
+  taskListId : string;
 }
 
 export type TaskListType = {
-  name: string;
-  tasks : TaskType[];
-};
+  id : string;
+  name : string;
+}
+
+export type TaskListItemProps = TaskListType & {
+  isEditing : boolean;
+  setIsEditing : (isEditing : boolean) => void;
+}
 
 export type SidePanelProps = {
   taskLists: TaskListType[];
