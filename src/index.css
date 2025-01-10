@@ -9,6 +9,14 @@ body {
   overflow-y: hidden; /* Prevent the whole column from scrolling */
 }
 
+.empty-task-list {
+  font-style: italic;
+  color: #95a5a6;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 14px;

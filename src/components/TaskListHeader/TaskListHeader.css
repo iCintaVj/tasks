@@ -1,0 +1,28 @@
+.task-list-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.task-list-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* .add-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-button:hover {
+    background-color: #2980b9;
+} */

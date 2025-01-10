@@ -1,0 +1,49 @@
+.task-list-item-content {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.task-list-item-name {
+  display: flex;
+}
+
+.task-list-item-icons {
+  display: none;
+}
+
+.task-list-item-content:hover .task-list-item-icons {
+  display: flex;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  fill: #fff;
+  transition: fill 0.2s ease;
+}
+
+.icon:hover {
+  fill: #666;
+}
+
+.edit-input {
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.edit-input:focus {
+  outline: none;
+}

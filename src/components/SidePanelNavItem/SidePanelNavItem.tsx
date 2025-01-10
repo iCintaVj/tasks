@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { TaskListItemProps, TaskListType } from '../../types/types.ts';
-import './TaskListItem.css';
+import { SidePanelNavItemProps } from '../../types/types.ts';
+import './SidePanelNavItem.css';
 import { ReactComponent as EditIcon } from '../../resources/edit.svg';
 import { ReactComponent as DeleteIcon } from '../../resources/delete.svg';
 
-const TaskListItem: React.FC<TaskListType> = ({ id, name }) => {
+const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists, setTaskLists }) => {
   const [newTitle, setNewTitle] = useState(name);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -14,9 +14,14 @@ const TaskListItem: React.FC<TaskListType> = ({ id, name }) => {
     setTimeout(() => inputRef.current?.focus(), 0); // Focus the input after rendering
   };
 
-  const handleSubmit = (e) => {
+  const handleDeleteClick = (e : any) => {    
+    const id = e.target.id;
+    const newTaskLists = taskLists.filter((taskList) => taskList.id != id);
+    setTaskLists(newTaskLists);
+  };
+
+  const handleSubmit = (e : any) => {
     setIsEditing(false);
-    console.log(newTitle);
   };
 
   return (
@@ -31,19 +36,18 @@ const TaskListItem: React.FC<TaskListType> = ({ id, name }) => {
           onChange={(e) => setNewTitle(e.target.value)}
           onBlur={handleSubmit}
           onKeyPress={(e) => {
-            console.log(e)
             if (e.key === 'Enter') handleSubmit(e);
           }}/>
           <div className="task-list-item-icons">
-            <DeleteIcon className="icon" onClick={() => console.log(`Delete ${id}`)} />
+            <DeleteIcon className="icon" onClick={() => setIsEditing(false)} />
           </div>
           </>
       ) : (
         <>
           <div className="task-list-item-name">{name}</div>
           <div className="task-list-item-icons">
-            <EditIcon className="icon" onClick={handleEditClick} />
-            <DeleteIcon className="icon" onClick={() => console.log(`Delete ${id}`)} />
+            <EditIcon id={id}className="icon" onClick={handleEditClick} />
+            <DeleteIcon id={id}className="icon" onClick={handleDeleteClick} />
           </div>
         </>
       )}
@@ -51,4 +55,4 @@ const TaskListItem: React.FC<TaskListType> = ({ id, name }) => {
   );
 };
 
-export default TaskListItem;
+export default SidePanelNavItem;

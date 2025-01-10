@@ -6,15 +6,6 @@
     overflow-y: hidden; /* Prevent the whole column from scrolling */
   }
   
-  .task-list-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #2c3e50;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 10px;
-  }
-  
   .task-list-items {
     list-style: none;
     padding: 0;
@@ -48,12 +39,6 @@
   @media (max-width: 600px) {
     .task-list-container {
       padding: 10px;
-    }
-
-    .task-list-header {
-      font-size: 20px;
-      margin-bottom: 15px;
-      padding-bottom: 8px;
     }
 
     .task-list-item {

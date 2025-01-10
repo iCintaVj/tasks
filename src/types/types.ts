@@ -24,6 +24,15 @@ export type TaskListType = {
   name : string;
 }
 
+export type TaskListCardProps = TaskListType & {
+  taskLists : TaskListType[];
+}
+
+export type SidePanelNavItemProps = TaskListType & {
+  taskLists : TaskListType[];
+  setTaskLists : (taskLists : TaskListType[]) => void;
+}
+
 export type TaskListItemProps = TaskListType & {
   isEditing : boolean;
   setIsEditing : (isEditing : boolean) => void;
@@ -31,6 +40,7 @@ export type TaskListItemProps = TaskListType & {
 
 export type SidePanelProps = {
   taskLists: TaskListType[];
+  setTaskLists: (taskLists: TaskListType[]) => void;
   onSelectTaskList: (taskListName: TaskListType) => void;
 }
 

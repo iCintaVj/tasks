@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './SidePanel.css';
 import { SidePanelProps, TaskListType } from '../../types/types.ts';
-import TaskListItem from '../TaskListItem/TaskListItem.tsx';
-import { ReactComponent as PlusIcon } from '../../resources/plus.svg';
+import SidePanelNavItem from '../SidePanelNavItem/SidePanelNavItem.tsx';
+import AddButton from '../AddButton/AddButton.jsx';
+import Logo from '../Logo/Logo.tsx';
 
-const SidePanel: React.FC<SidePanelProps> = ({ taskLists, onSelectTaskList }) => {
+const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, onSelectTaskList }) => {
   const [selectedTaskList, setSelectedTaskList] = useState<TaskListType | null>(taskLists[0]);
 
   // Handler for selecting a task list
@@ -14,30 +15,36 @@ const SidePanel: React.FC<SidePanelProps> = ({ taskLists, onSelectTaskList }) =>
   };
 
   const handleAddTaskList = () => {
-
+    if(taskLists.length >= 15){
+      window.alert('You can only have 15 task lists');
+      return;
+    }
+    const newTaskList : TaskListType = {
+      name : "New Task List "+(taskLists.length+1),
+      id : "taskList"+(taskLists.length+1)
+    }
+    taskLists.push(newTaskList);
+    setTaskLists([...taskLists])
   }
   
   return (
     <div className="side-panel">
-      <div className="logo">
-        <h1>Tasks</h1>
-      </div>
+      <Logo title={'Tasks'}/>
       <div className="task-lists">
         <h3>Task Lists</h3>
         <ul className="task-lists-ul">
-          {taskLists.map((taskList) => (
+          {taskLists.length >0 ?  taskLists.map((taskList) => (
             <li key={taskList.name} className={`task-lists-li ${selectedTaskList === taskList ? 'selected' : ''}`} onClick={() => handleSelect(taskList)}>
-              <TaskListItem {...taskList} />
+              <SidePanelNavItem {...taskList} taskLists={taskLists} setTaskLists={setTaskLists}/>
             </li>
-          ))}
-          <li key='addTaskList' className='task-lists-li' onClick={handleAddTaskList}>
-            <PlusIcon className="icon"/>
-          </li>
+          )) : (
+            <li key='empty-task-list' className='task-lists-li'>
+              <span>No Task Lists Found</span>
+            </li>
+          )}
         </ul>
       </div>
-      <div className="settings">
-        <button>Settings</button>
-      </div>
+      <AddButton content={'Create new Task List'} onClick={handleAddTaskList}/>
     </div>
   );
 };
