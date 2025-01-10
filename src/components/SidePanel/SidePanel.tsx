@@ -25,6 +25,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, onSelect
     }
     taskLists.push(newTaskList);
     setTaskLists([...taskLists])
+    onSelectTaskList(newTaskList);
   }
   
   return (

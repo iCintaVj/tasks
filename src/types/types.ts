@@ -1,5 +1,5 @@
 export type TaskType = {
-  id: number;
+  id: string;
   name: string;
   priority: 'High' | 'Medium' | 'Low';
   dueDate: string;
@@ -7,6 +7,11 @@ export type TaskType = {
   taskListId: string;
   description? : string;
 };
+
+export type TaskCardProps = TaskType & {
+  tasks : TaskType[];
+  setTasks : (tasks : TaskType[]) => void;
+}
 
 export type ColumnType = {
   id : string;
@@ -17,6 +22,8 @@ export type ColumnProps = {
   id : string;
   name: string;
   taskListId : string;
+  tasks : TaskType[];
+  setTasks : (tasks : TaskType[]) => void;
 }
 
 export type TaskListType = {
@@ -26,6 +33,12 @@ export type TaskListType = {
 
 export type TaskListCardProps = TaskListType & {
   taskLists : TaskListType[];
+}
+
+export type TaskListHeaderProps = {
+  taskListName : string;
+  tasks : TaskType[];
+  setTasks: (tasks : TaskType[]) => void;
 }
 
 export type SidePanelNavItemProps = TaskListType & {

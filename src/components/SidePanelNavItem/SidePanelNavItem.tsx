@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { SidePanelNavItemProps } from '../../types/types.ts';
+import { SidePanelNavItemProps, TaskListType } from '../../types/types.ts';
 import './SidePanelNavItem.css';
 import { ReactComponent as EditIcon } from '../../resources/edit.svg';
 import { ReactComponent as DeleteIcon } from '../../resources/delete.svg';
@@ -9,7 +9,7 @@ const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists
   const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditClick = () => {
+  const handleEditClick = (e:any) => {
     setIsEditing(true);
     setTimeout(() => inputRef.current?.focus(), 0); // Focus the input after rendering
   };
@@ -22,6 +22,15 @@ const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists
 
   const handleSubmit = (e : any) => {
     setIsEditing(false);
+    const id = e.target.id
+    const value = e.target.value
+    const newTaskLists : TaskListType[] = taskLists.map((taskList : TaskListType) => {
+      if(taskList.id === id) {
+        taskList.name = value;
+      }
+      return taskList;
+    });
+    setTaskLists(newTaskLists);
   };
 
   return (
@@ -29,6 +38,7 @@ const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists
       {isEditing ? (
         <>
         <input
+          id={id}
           className="edit-input"
           type="text"
           ref={inputRef}

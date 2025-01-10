@@ -1,76 +1,102 @@
 .task-card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-  }
-  
-  .task-card:hover {
-    transform: translateY(-5px);
-    background-color: #2c3e50da;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  background-color: #2c3e50da;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   -webkit-text-fill-color: white;
   cursor: pointer;
+}
+
+.task-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 8px;
+}
+
+.task-priority {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.priority-high {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.priority-medium {
+  background-color: #f1c40f;
+  color: #fff;
+}
+
+.priority-low {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.task-due-date {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-top: 10px;
+}
+
+.task-card-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.task-card-delete-icon,
+.task-card-edit-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.task-card-delete-icon:hover {
+  transform: scale(1.2);
+  color: #ff4d4f;
+}
+
+.task-card-edit-icon:hover {
+  transform: scale(1.2);
+  color: #4caf50;
+}
+
+@media (max-width: 600px) {
+  .task-card {
+    padding: 12px;
+    margin-bottom: 10px;
   }
-  
+
   .task-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #34495e;
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-bottom: 6px;
   }
-  
+
   .task-priority {
-    font-size: 14px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: inline-block;
+    font-size: 12px;
+    padding: 3px 6px;
   }
-  
-  .priority-high {
-    background-color: #e74c3c;
-    color: #fff;
-  }
-  
-  .priority-medium {
-    background-color: #f1c40f;
-    color: #fff;
-  }
-  
-  .priority-low {
-    background-color: #2ecc71;
-    color: #fff;
-  }
-  
+
   .task-due-date {
-    font-size: 14px;
-    color: #7f8c8d;
-    margin-top: 10px;
+    font-size: 12px;
+    margin-top: 8px;
   }
-  
-
-  @media (max-width: 600px) {
-    .task-card {
-      padding: 12px;
-      margin-bottom: 10px;
-    }
-
-    .task-name {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .task-priority {
-      font-size: 12px;
-      padding: 3px 6px;
-    }
-
-    .task-due-date {
-      font-size: 12px;
-      margin-top: 8px;
-    }
-  }
+}

@@ -16,7 +16,7 @@ const App: React.FC = () => {
     } else if (!taskLists.find((taskList) => taskList.id === selectedTaskList?.id)) {
       setSelectedTaskList(taskLists[0]); // Set to first task list if current selection is removed
     }
-  }, [taskLists]);
+  }, [taskLists, selectedTaskList]);
 
   return (
     <div className="container">
