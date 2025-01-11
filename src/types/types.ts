@@ -11,6 +11,8 @@ export type TaskType = {
 export type TaskCardProps = TaskType & {
   tasks : TaskType[];
   setTasks : (tasks : TaskType[]) => void;
+  setIsModalOpen : (isModalOpen : boolean) => void;
+  onSelectTask : (task : TaskType) => void;
 }
 
 export type ColumnType = {
@@ -24,6 +26,8 @@ export type ColumnProps = {
   taskListId : string;
   tasks : TaskType[];
   setTasks : (tasks : TaskType[]) => void;
+  setIsModalOpen : (isModalOpen : boolean) => void;
+  onSelectTask : (task : TaskType) => void;
 }
 
 export type TaskListType = {
@@ -42,6 +46,8 @@ export type TaskListHeaderProps = {
   taskListName : string;
   tasks : TaskType[];
   setTasks: (tasks : TaskType[]) => void;
+  setIsModalOpen : (isModalOpen : boolean) => void;
+  onSelectTask : (task : TaskType | null) => void;
 }
 
 export type SidePanelNavItemProps = TaskListType & {
@@ -61,3 +67,11 @@ export type SidePanelProps = {
   onSelectTaskList: (taskListName: TaskListType) => void;
 }
 
+export type TaskModalProps = {
+  tasks : TaskType[];
+  setTasks : (tasks : TaskType[]) => void;
+  task?: TaskType | null;
+  isOpen: boolean;
+  onClose: () => void;
+  taskListId: string;
+}

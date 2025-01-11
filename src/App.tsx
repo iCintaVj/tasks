@@ -3,12 +3,13 @@ import SidePanel from './components/SidePanel/SidePanel.tsx';
 import TaskListCard from './components/TaskListCard/TaskListCard.tsx';
 import './App.css';
 import { dummyTaskLists, dummyTasks } from './data/initialData.ts';
+import { TaskType } from './types/types.ts';
 
 const App: React.FC = () => {
 
   const [taskLists, setTaskLists] = useState(dummyTaskLists);
 
-  const [tasks, setTasks] = useState(dummyTasks);
+  const [tasks, setTasks] = useState<TaskType[]>(dummyTasks);
 
   const [selectedTaskList, setSelectedTaskList] = useState(taskLists[0]);
 

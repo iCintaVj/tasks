@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import './TaskCard.css';
 import { TaskCardProps, TaskType } from '../../types/types.ts';
-import { ReactComponent as DeleteIcon } from '../../resources/delete.svg';
-import { ReactComponent as EditIcon } from '../../resources/edit.svg';
 
-const TaskCard: React.FC<TaskCardProps> = ({id, name, dueDate, priority,status,taskListId,tasks,description, setTasks}) => {
+const TaskCard: React.FC<TaskCardProps> = ({tasks,setTasks, setIsModalOpen, onSelectTask, ...task}) => {
         
-    const priorityClass = `priority-${priority.toLowerCase()}`;
+    const priorityClass = `priority-${task.priority.toLowerCase()}`;
 
     function handleDeleteTask(e : any): void {
         const id = e.target.id;
@@ -15,23 +13,20 @@ const TaskCard: React.FC<TaskCardProps> = ({id, name, dueDate, priority,status,t
     }
 
     const handleEditTask = (e: any): void => {
-        const taskId = e.target.id;
-        const taskToEdit = tasks.find((task) => task.id === taskId);
-        if (taskToEdit) {
-            // TODO: Implement edit task functionality
-        }
-      };
+        onSelectTask(task);
+        setIsModalOpen(true);
+    };
 
     return (
-        <div className="task-card" key={`task-card-${id}`}>
-            <h3 className="task-name" key={`task-name-${id}`}>{name}</h3>
-            <div className={`task-priority ${priorityClass}`} key={`task-priority-${id}`}>{priority}</div>
-            <p className="task-due-date" key={`task-due-date-${id}`}>Due: {dueDate}</p>
+        <div className="task-card" key={`task-card-${task.id}`}>
+            <h3 className="task-name" key={`task-name-${task.id}`}>{task.name}</h3>
+            <div className={`task-priority ${priorityClass}`} key={`task-priority-${task.id}`}>{task.priority}</div>
+            <p className="task-due-date" key={`task-due-date-${task.id}`}>Due: {task.dueDate}</p>
             <div className="task-card-icons" >
-                <button className="task-card-edit-icon" id={id} onClick={handleEditTask}>
+                <button className="task-card-edit-icon" id={task.id} onClick={handleEditTask}>
                     Edit
                 </button>
-                <button className="task-card-delete-icon" id={id} onClick={handleDeleteTask}>
+                <button className="task-card-delete-icon" id={task.id} onClick={handleDeleteTask}>
                     Delete
                 </button>
             </div>

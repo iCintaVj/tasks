@@ -4,15 +4,17 @@ import './Column.css';
 import { ColumnProps, ColumnType } from '../../types/types.ts';
 
 
-const Column: React.FC<ColumnProps> = ({ id, name, taskListId, tasks, setTasks }) => {
+const Column: React.FC<ColumnProps> = ({ id, name, taskListId, tasks, setTasks , setIsModalOpen, onSelectTask}) => {
     return (
         <div className="column" id={id}>
             <h2 className="column-title">{name}</h2>
                 <div className="task-list">
                     {
                         tasks.length > 0 && tasks.some((task) => task.taskListId === taskListId) ?
-                       tasks.filter((task) => task.taskListId === taskListId).filter((task) => (task.status === name)).map((task) => (
-                            <TaskCard key={task.id} {...task} tasks={tasks} setTasks={setTasks}/>
+                        tasks.filter((task) => task.taskListId === taskListId).filter((task) => (task.status === name)).map((task) => (
+                            <>
+                                <TaskCard key={task.id} {...task} tasks={tasks} setTasks={setTasks} setIsModalOpen={setIsModalOpen} onSelectTask={onSelectTask}/>
+                            </>
                         )) :
                         (
                             <span className='empty-task-list'>No tasks found</span>

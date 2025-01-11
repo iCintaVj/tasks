@@ -1,74 +1,93 @@
-import React, { useState } from 'react';
-import './TaskModal.css'; // Add appropriate styles for the modal
-import { TaskType } from '../../types/types';
+import React, { useState, useEffect } from 'react';
+import './TaskModal.css';
+import { TaskModalProps, TaskType } from '../../types/types';
 
-interface TaskModalProps {
-  isOpen: boolean;
-  setTasks: React.Dispatch<React.SetStateAction<TaskType[]>>;
-  onClose: () => void;
-}
+const TaskModal: React.FC<TaskModalProps> = ({ task, isOpen, onClose, taskListId, tasks, setTasks }) => {
+  const [taskName, setTaskName] = useState(task?.name || '');
+  const [description, setDescription] = useState(task?.description || undefined);
+  const [priority, setPriority] = useState<'High' | 'Medium' | 'Low'>(task?.priority || 'Medium');
+  const [dueDate, setDueDate] = useState(task?.dueDate || new Date().toISOString().split('T')[0]);
 
-const TaskModal: React.FC<TaskModalProps> = ({ isOpen, setTasks, onClose }) => {
-  const [taskName, setTaskName] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [priority, setPriority] = useState('Low');
-  const [description, setDescription] = useState('');
+  useEffect(() => {
+    if (task) {
+      setTaskName(task.name);
+      setDescription(task.description);
+      setPriority(task.priority);
+      setDueDate(task.dueDate);
+    }else {
+        setTaskName('');
+        setDescription('');
+        setPriority('Medium');
+        setDueDate('');
+      }
+  }, [task]);
 
-  const handleSubmit = () => {
-    const newTask = {
-      id: Date.now().toString(), // Generate unique ID for the new task
+  const handleSave = () => {
+    const newTask: TaskType = {
+      id: (task?.id || Math.floor(Math.random() * 1000)) + '',
+      taskListId,
       name: taskName,
-      dueDate,
-      priority,
       description,
+      priority,
+      dueDate,
+      status: task?.status || 'Todo',
     };
-    setTasks((prevTasks) => [...prevTasks, newTask]);
-    onClose(); // Close the modal after adding the task
-  };
+
+    if(taskName === '' || dueDate === ''){
+        alert('Task Name and Due Date are required');
+        return;
+    }
+  
+    // Check if the task already exists
+    const taskIndex = tasks.findIndex((t) => t.id === newTask.id);
+  
+    if (taskIndex > -1) {
+      // If the task exists, update it
+      const updatedTasks = [...tasks];
+      updatedTasks[taskIndex] = newTask;
+      setTasks(updatedTasks);
+    } else {
+      // If the task doesn't exist, add it
+      setTasks([...tasks, newTask]);
+    }
+  
+    onClose();
+  };  
+
+  if (!isOpen) return null;
+
+  console.log('TaskModal', task);
+  
 
   return (
-    <div className={`task-modal ${isOpen ? 'open' : ''}`} onClick={onClose}>
-      <div className="task-modal-content" onClick={(e) => e.stopPropagation()}>
-        <h3>Add New Task</h3>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div>
-            <label>Task Name:</label>
-            <input
-              type="text"
-              value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Due Date:</label>
-            <input
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Priority:</label>
-            <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
-          </div>
-          <div>
-            <label>Description:</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <div className="modal-buttons">
-            <button type="button" onClick={onClose}>Cancel</button>
-            <button type="submit" onClick={handleSubmit}>Add Task</button>
-          </div>
-        </form>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>{task ? 'Edit Task' : 'Add Task'}</h2>
+        <input
+          type="text"
+          placeholder="Task Name"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+        />
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <select value={priority} onChange={(e) => setPriority(e.target.value as 'High' | 'Medium' | 'Low')}>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
+        <div className="modal-actions">
+          <button onClick={handleSave}>Save</button>
+          <button onClick={onClose}>Cancel</button>
+        </div>
       </div>
     </div>
   );
