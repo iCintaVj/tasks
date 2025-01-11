@@ -33,9 +33,12 @@ export type TaskListType = {
 
 export type TaskListCardProps = TaskListType & {
   taskLists : TaskListType[];
+  tasks : TaskType[];
+  setTasks : (tasks : TaskType[]) => void;
 }
 
 export type TaskListHeaderProps = {
+  taskListId : string;
   taskListName : string;
   tasks : TaskType[];
   setTasks: (tasks : TaskType[]) => void;
@@ -54,6 +57,7 @@ export type TaskListItemProps = TaskListType & {
 export type SidePanelProps = {
   taskLists: TaskListType[];
   setTaskLists: (taskLists: TaskListType[]) => void;
+  selectedTaskList: TaskListType;
   onSelectTaskList: (taskListName: TaskListType) => void;
 }
 

@@ -6,15 +6,14 @@ import { dummyColumns, dummyTasks } from '../../data/initialData.ts';
 import { TaskListCardProps, TaskListType } from '../../types/types.ts';
 import TaskListHeader from '../TaskListHeader/TaskListHeader.tsx';
 
-const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists }) => {
+const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks, setTasks }) => {
     const [columns, setColumns] = useState(dummyColumns);
-    const [tasks, setTasks] = useState(dummyTasks);
     
     return (
         <div className="task-list-container" id={id}>
-            <TaskListHeader key= {name} taskListName={name} tasks={tasks} setTasks={setTasks}/>
+            <TaskListHeader key= {name} taskListId = {id} taskListName={name} tasks={tasks} setTasks={setTasks}/>
             <ul className='task-list-items'>
-                { taskLists && taskLists.some((taskList => taskList.id === id)) ? columns.map((column, index) => (
+                { taskLists && taskLists.some((taskList => taskList.id === id)) ? columns.map((column) => (
                     <li key={column.id}>
                         <Column id={column.id} name={column.name} taskListId={id} tasks={tasks} setTasks={setTasks}/>
                     </li>

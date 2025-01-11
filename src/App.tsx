@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import SidePanel from './components/SidePanel/SidePanel.tsx';
 import TaskListCard from './components/TaskListCard/TaskListCard.tsx';
 import './App.css';
-import { dummyTaskLists } from './data/initialData.ts';
+import { dummyTaskLists, dummyTasks } from './data/initialData.ts';
 
 const App: React.FC = () => {
 
   const [taskLists, setTaskLists] = useState(dummyTaskLists);
+
+  const [tasks, setTasks] = useState(dummyTasks);
 
   const [selectedTaskList, setSelectedTaskList] = useState(taskLists[0]);
 
@@ -16,16 +18,18 @@ const App: React.FC = () => {
     } else if (!taskLists.find((taskList) => taskList.id === selectedTaskList?.id)) {
       setSelectedTaskList(taskLists[0]); // Set to first task list if current selection is removed
     }
-  }, [taskLists, selectedTaskList]);
+  }, [taskLists, selectedTaskList]);  
 
   return (
     <div className="container">
       <div className="left-section">
-        <SidePanel key="side-panel" taskLists={taskLists} setTaskLists={setTaskLists} onSelectTaskList={setSelectedTaskList} />
+        <SidePanel key="side-panel" taskLists={taskLists} setTaskLists={setTaskLists} selectedTaskList={selectedTaskList} onSelectTaskList={setSelectedTaskList} />
       </div>
-      { taskLists.length >0 ? <div className="right-section">
-        <TaskListCard key="task-list-card" taskLists={taskLists} {...selectedTaskList} />
-      </div> : <span className='empty-task-list'> No Task Lists Found</span>}
+      { taskLists.length >0 ? 
+        <div className="right-section">
+          <TaskListCard key="task-list-card" taskLists={taskLists} id={selectedTaskList.id} name={selectedTaskList.name} tasks={tasks} setTasks={setTasks}/>
+        </div> : 
+        <span className='empty-task-list'> No Task Lists Found</span>}
     </div>
   );
 };

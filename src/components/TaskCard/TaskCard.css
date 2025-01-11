@@ -71,12 +71,10 @@
 
 .task-card-delete-icon:hover {
   transform: scale(1.2);
-  color: #ff4d4f;
 }
 
 .task-card-edit-icon:hover {
   transform: scale(1.2);
-  color: #4caf50;
 }
 
 @media (max-width: 600px) {

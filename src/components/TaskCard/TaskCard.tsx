@@ -3,14 +3,12 @@ import './TaskCard.css';
 import { TaskCardProps, TaskType } from '../../types/types.ts';
 import { ReactComponent as DeleteIcon } from '../../resources/delete.svg';
 import { ReactComponent as EditIcon } from '../../resources/edit.svg';
-import TaskModal from '../TaskModal/TaskModal.tsx';
 
 const TaskCard: React.FC<TaskCardProps> = ({id, name, dueDate, priority,status,taskListId,tasks,description, setTasks}) => {
         
     const priorityClass = `priority-${priority.toLowerCase()}`;
 
     function handleDeleteTask(e : any): void {
-        console.log(e.target.id);
         const id = e.target.id;
         const newTasks = tasks.filter((taskList) => taskList.id != id);
         setTasks(newTasks);
@@ -20,11 +18,9 @@ const TaskCard: React.FC<TaskCardProps> = ({id, name, dueDate, priority,status,t
         const taskId = e.target.id;
         const taskToEdit = tasks.find((task) => task.id === taskId);
         if (taskToEdit) {
-          
+            // TODO: Implement edit task functionality
         }
       };
-    
-
 
     return (
         <div className="task-card" key={`task-card-${id}`}>

@@ -4,13 +4,12 @@ import { SidePanelProps, TaskListType } from '../../types/types.ts';
 import SidePanelNavItem from '../SidePanelNavItem/SidePanelNavItem.tsx';
 import AddButton from '../AddButton/AddButton.jsx';
 import Logo from '../Logo/Logo.tsx';
+import { convertToDashSeparatedId } from '../../utils/helper.ts';
 
-const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, onSelectTaskList }) => {
-  const [selectedTaskList, setSelectedTaskList] = useState<TaskListType | null>(taskLists[0]);
+const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, selectedTaskList, onSelectTaskList }) => {
 
   // Handler for selecting a task list
   const handleSelect = (taskList: TaskListType) => {
-    setSelectedTaskList(taskList);  // Toggle selection
     onSelectTaskList(taskList);
   };
 
@@ -21,7 +20,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, onSelect
     }
     const newTaskList : TaskListType = {
       name : "New Task List "+(taskLists.length+1),
-      id : "taskList"+(taskLists.length+1)
+      id : convertToDashSeparatedId("New Task List "+(taskLists.length+1)),
     }
     taskLists.push(newTaskList);
     setTaskLists([...taskLists])

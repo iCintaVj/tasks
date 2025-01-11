@@ -5,9 +5,6 @@ import { ColumnProps, ColumnType } from '../../types/types.ts';
 
 
 const Column: React.FC<ColumnProps> = ({ id, name, taskListId, tasks, setTasks }) => {
-
-    
-    
     return (
         <div className="column" id={id}>
             <h2 className="column-title">{name}</h2>

@@ -4,20 +4,20 @@ import AddButton from '../AddButton/AddButton';
 import { TaskListHeaderProps, TaskType } from '../../types/types.ts';
 import {convertToDashSeparatedId} from '../../utils/helper.ts';
 
-const TaskListHeader: React.FC<TaskListHeaderProps> = ({ taskListName, tasks, setTasks }) => {
+const TaskListHeader: React.FC<TaskListHeaderProps> = ({ taskListId, taskListName, tasks, setTasks }) => {
 
     const handleAddTaskList = () => {
         const newTask : TaskType = {
-            id: Math.floor(Math.random() * 1000),
-            taskListId: convertToDashSeparatedId(taskListName),
+            id: Math.floor(Math.random() * 1000)+'',
+            taskListId: taskListId,
             name: 'New Task',
             description: 'New Task Description',
             status: 'Todo',
             priority: 'High',
             dueDate: new Date().toISOString()
         }
-        tasks.push(newTask);
-        setTasks([...tasks]);
+        setTasks([...tasks, newTask]);
+        console.log('task added', newTask);
     };
 
     return (

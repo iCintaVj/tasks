@@ -49,15 +49,21 @@ const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists
             if (e.key === 'Enter') handleSubmit(e);
           }}/>
           <div className="task-list-item-icons">
-            <DeleteIcon className="icon" onClick={() => setIsEditing(false)} />
+            <button className="task-card-delete-icon" id={id} onClick={()=> setIsEditing(false)}>
+              Cancel
+            </button>
           </div>
           </>
       ) : (
         <>
           <div className="task-list-item-name">{name}</div>
           <div className="task-list-item-icons">
-            <EditIcon id={id}className="icon" onClick={handleEditClick} />
-            <DeleteIcon id={id}className="icon" onClick={handleDeleteClick} />
+            <button className="task-card-edit-icon" id={id} onClick={handleEditClick}>
+                Edit
+            </button>
+            <button className="task-card-delete-icon" id={id} onClick={handleDeleteClick}>
+                Delete
+            </button>
           </div>
         </>
       )}
