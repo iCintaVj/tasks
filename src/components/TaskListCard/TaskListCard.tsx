@@ -13,8 +13,8 @@ const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks,
     const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
 
     const handleModalClose = () => {
-        setSelectedTask(null)
         setIsModalOpen(false);
+        setSelectedTask(null);        
     }
     
     return (
@@ -31,14 +31,15 @@ const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks,
                     </li>
                 )}
             </ul>
-            <TaskModal
-                task={selectedTask}
-                tasks={tasks}
-                setTasks={setTasks}
-                isOpen={isModalOpen}
-                onClose={handleModalClose}
-                taskListId={id}
-            />
+            { isModalOpen && 
+                <TaskModal
+                    task={selectedTask}
+                    tasks={tasks}
+                    setTasks={setTasks}
+                    onClose={handleModalClose}
+                    taskListId={id}
+                />
+            }
         </div>
     );
 };

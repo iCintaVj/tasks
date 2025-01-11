@@ -71,7 +71,6 @@ export type TaskModalProps = {
   tasks : TaskType[];
   setTasks : (tasks : TaskType[]) => void;
   task?: TaskType | null;
-  isOpen: boolean;
   onClose: () => void;
   taskListId: string;
 }

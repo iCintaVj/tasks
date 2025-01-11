@@ -13,7 +13,7 @@ const TaskListHeader: React.FC<TaskListHeaderProps> = ({ taskListId, taskListNam
     return (
         <div className="task-list-header-container">
             <h1 className="task-list-header">{taskListName}</h1>
-            <AddButton content={'Create new Task'} onClick={()=>setIsModalOpen(true)}/>
+            <AddButton content={'Create new Task'} onClick={onAddTask}/>
         </div>
     );
 };
