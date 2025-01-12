@@ -1,29 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TaskListCard.css';
 import Column from '../Column/Column.tsx';
-import { dummyColumns, dummyTasks } from '../../data/initialData.ts';
+import { dummyColumns } from '../../data/initialData.ts';
 
-import { TaskListCardProps, TaskListType, TaskType } from '../../types/types.ts';
+import { ColumnType, TaskListCardProps, TaskType } from '../../types/types.ts';
 import TaskListHeader from '../TaskListHeader/TaskListHeader.tsx';
 import TaskModal from '../TaskModal/TaskModal.tsx';
+import { getColumns } from '../../data/dbData.ts';
 
 const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks, setTasks }) => {
-    const [columns, setColumns] = useState(dummyColumns);
+
+    useEffect(() => {
+        const fetchColumns = async () => {
+            try {
+                const response: ColumnType[] = await getColumns();
+                setColumns(response);
+            } catch (error) {
+                console.error('Error fetching columns:', error);
+            }
+        };
+
+        fetchColumns();
+    }, []);
+
+    const [columns, setColumns] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
 
     const handleModalClose = () => {
         setIsModalOpen(false);
-        setSelectedTask(null);        
+        setSelectedTask(null);
     }
-    
+
     return (
         <div className="task-list-container" id={id}>
-            <TaskListHeader key= {name} taskListId = {id} taskListName={name} tasks={tasks} setTasks={setTasks} setIsModalOpen={setIsModalOpen} onSelectTask={setSelectedTask}/>
+            <TaskListHeader key={name} taskListId={id} taskListName={name} tasks={tasks} setTasks={setTasks} setIsModalOpen={setIsModalOpen} onSelectTask={setSelectedTask} />
             <ul className='task-list-items'>
-                { taskLists && taskLists.some((taskList => taskList.id === id)) ? columns.map((column) => (
-                    <li key={column.id}>
-                        <Column id={column.id} name={column.name} taskListId={id} tasks={tasks} setTasks={setTasks} setIsModalOpen={setIsModalOpen} onSelectTask={setSelectedTask}/>
+                {taskLists?.some((taskList => taskList.id === id)) ? columns.map((column) => (
+                    <li key={column}>
+                        <Column name={column} taskListId={id} tasks={tasks} setTasks={setTasks} setIsModalOpen={setIsModalOpen} onSelectTask={setSelectedTask} />
                     </li>
                 )) : (
                     <li key='empty-column'>
@@ -31,7 +46,7 @@ const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks,
                     </li>
                 )}
             </ul>
-            { isModalOpen && 
+            {isModalOpen &&
                 <TaskModal
                     task={selectedTask}
                     tasks={tasks}

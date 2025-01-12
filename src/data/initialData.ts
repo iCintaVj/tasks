@@ -21,15 +21,12 @@ export const dummyTaskLists : TaskListType[] = [
 
 export const dummyColumns : ColumnType[] = [
   {
-    id: 'todo',
     name: 'Todo',
   },
   {
-    id: 'in-progress',
     name: 'In Progress',
   },
   {
-    id: 'Done',
     name: 'Done',
   }
 ]

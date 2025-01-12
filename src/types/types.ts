@@ -16,13 +16,10 @@ export type TaskCardProps = TaskType & {
 }
 
 export type ColumnType = {
-  id : string;
   name: string;
 }
 
-export type ColumnProps = {
-  id : string;
-  name: string;
+export type ColumnProps = ColumnType & {
   taskListId : string;
   tasks : TaskType[];
   setTasks : (tasks : TaskType[]) => void;
