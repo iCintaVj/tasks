@@ -4,6 +4,7 @@ import TaskListCard from './components/TaskListCard/TaskListCard.tsx';
 import './App.css';
 import { TaskListType, TaskType } from './types/types.ts';
 import { getTaskLists, getTasks } from './data/dbData.ts';
+import { dummyTaskLists, dummyTasks } from './data/initialData.ts';
 
 const App: React.FC = () => {
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
                   setTaskLists(response);
               } catch (error) {
                   console.error('Error fetching columns:', error);
+                  setTaskLists(dummyTaskLists);
               }
           };
 
@@ -23,6 +25,7 @@ const App: React.FC = () => {
                   setTasks(response);
               } catch (error) {
                   console.error('Error fetching columns:', error);
+                  setTasks(dummyTasks);
               }
           };
   

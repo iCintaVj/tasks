@@ -6,6 +6,7 @@ import { ColumnType, TaskListCardProps, TaskType } from '../../types/types.ts';
 import TaskListHeader from '../TaskListHeader/TaskListHeader.tsx';
 import TaskModal from '../TaskModal/TaskModal.tsx';
 import { getColumns } from '../../data/dbData.ts';
+import { dummyColumns } from '../../data/initialData.ts';
 
 const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks, setTasks }) => {
 
@@ -16,6 +17,7 @@ const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks,
                 setColumns(response);
             } catch (error) {
                 console.error('Error fetching columns:', error);
+                setColumns(dummyColumns);
             }
         };
 
