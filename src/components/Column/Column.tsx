@@ -4,7 +4,7 @@ import './Column.css';
 import { ColumnProps } from '../../types/types.ts';
 
 
-const Column: React.FC<ColumnProps> = ({ name, taskListId, tasks, setTasks , setIsModalOpen, onSelectTask}) => {
+const Column: React.FC<ColumnProps> = ({name, taskListId, tasks, setTasks , setIsModalOpen, onSelectTask}) => {
     return (
         <div className="column">
             <h2 className="column-title">{name}</h2>

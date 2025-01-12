@@ -15,11 +15,8 @@ export type TaskCardProps = TaskType & {
   onSelectTask : (task : TaskType) => void;
 }
 
-export type ColumnType = {
-  name: string;
-}
-
-export type ColumnProps = ColumnType & {
+export type ColumnProps = {
+  name : string;
   taskListId : string;
   tasks : TaskType[];
   setTasks : (tasks : TaskType[]) => void;
