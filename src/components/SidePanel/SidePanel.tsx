@@ -5,6 +5,7 @@ import SidePanelNavItem from '../SidePanelNavItem/SidePanelNavItem.tsx';
 import AddButton from '../AddButton/AddButton.jsx';
 import Logo from '../Logo/Logo.tsx';
 import { convertToDashSeparatedId } from '../../utils/helper.ts';
+import { createTaskList } from '../../data/dbData.ts';
 
 const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, selectedTaskList, onSelectTaskList }) => {
 
@@ -25,6 +26,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, selected
     taskLists.push(newTaskList);
     setTaskLists([...taskLists])
     onSelectTaskList(newTaskList);
+    createTaskList(newTaskList);
   }
   
   return (

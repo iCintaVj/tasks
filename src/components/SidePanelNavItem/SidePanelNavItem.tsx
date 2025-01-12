@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { SidePanelNavItemProps, TaskListType } from '../../types/types.ts';
 import './SidePanelNavItem.css';
-import { ReactComponent as EditIcon } from '../../resources/edit.svg';
-import { ReactComponent as DeleteIcon } from '../../resources/delete.svg';
+import { deleteTaskList, updateTaskList } from '../../data/dbData.ts';
 
 const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists, setTaskLists }) => {
   const [newTitle, setNewTitle] = useState(name);
@@ -18,6 +17,7 @@ const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists
     const id = e.target.id;
     const newTaskLists = taskLists.filter((taskList) => taskList.id != id);
     setTaskLists(newTaskLists);
+    deleteTaskList(id);
   };
 
   const handleSubmit = (e : any) => {
@@ -27,6 +27,7 @@ const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists
     const newTaskLists : TaskListType[] = taskLists.map((taskList : TaskListType) => {
       if(taskList.id === id) {
         taskList.name = value;
+        updateTaskList(taskList);
       }
       return taskList;
     });

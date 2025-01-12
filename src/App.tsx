@@ -2,24 +2,48 @@ import React, { useEffect, useState } from 'react';
 import SidePanel from './components/SidePanel/SidePanel.tsx';
 import TaskListCard from './components/TaskListCard/TaskListCard.tsx';
 import './App.css';
-import { dummyTaskLists, dummyTasks } from './data/initialData.ts';
-import { TaskType } from './types/types.ts';
+import { TaskListType, TaskType } from './types/types.ts';
+import { getTaskLists, getTasks } from './data/dbData.ts';
 
 const App: React.FC = () => {
 
-  const [taskLists, setTaskLists] = useState(dummyTaskLists);
+  useEffect(() => {
+          const fetchTaskLists = async () => {
+              try {
+                  const response: TaskListType[] = await getTaskLists();
+                  setTaskLists(response);
+              } catch (error) {
+                  console.error('Error fetching columns:', error);
+              }
+          };
 
-  const [tasks, setTasks] = useState<TaskType[]>(dummyTasks);
+          const fetchTasks = async () => {
+              try {
+                  const response: TaskType[] = await getTasks();
+                  setTasks(response);
+              } catch (error) {
+                  console.error('Error fetching columns:', error);
+              }
+          };
+  
+          fetchTaskLists();
+          fetchTasks();
+      }, []);
 
-  const [selectedTaskList, setSelectedTaskList] = useState(taskLists[0]);
+  const [taskLists, setTaskLists] = useState<TaskListType[]>([]);
+
+  const [tasks, setTasks] = useState<TaskType[]>([]);
+
+  const [selectedTaskList, setSelectedTaskList] = useState<TaskListType>({id: '', name: ''});
 
    useEffect(() => {
     if (taskLists.length === 0) {
-      setSelectedTaskList(null); // No task lists left
+      setSelectedTaskList({id: '', name: ''}); // No task lists left
     } else if (!taskLists.find((taskList) => taskList.id === selectedTaskList?.id)) {
       setSelectedTaskList(taskLists[0]); // Set to first task list if current selection is removed
     }
   }, [taskLists, selectedTaskList]);  
+  
 
   return (
     <div className="container">

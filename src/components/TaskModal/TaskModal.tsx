@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './TaskModal.css';
 import { TaskModalProps, TaskType } from '../../types/types';
+import { createTask, updateTask } from '../../data/dbData.ts';
 
 const TaskModal: React.FC<TaskModalProps> = ({ task, onClose, taskListId, tasks, setTasks }) => {
     const [taskName, setTaskName] = useState(task?.name || '');
@@ -44,9 +45,11 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onClose, taskListId, tasks,
             const updatedTasks = [...tasks];
             updatedTasks[taskIndex] = newTask;
             setTasks(updatedTasks);
+            updateTask(newTask);
         } else {
             // If the task doesn't exist, add it
             setTasks([...tasks, newTask]);
+            createTask(newTask);
         }
 
         onClose();

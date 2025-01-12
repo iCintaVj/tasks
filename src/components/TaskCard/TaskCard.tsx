@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TaskCard.css';
 import { TaskCardProps, TaskType } from '../../types/types.ts';
+import { deleteTask } from '../../data/dbData.ts';
 
 const TaskCard: React.FC<TaskCardProps> = ({tasks,setTasks, setIsModalOpen, onSelectTask, ...task}) => {
         
@@ -10,6 +11,7 @@ const TaskCard: React.FC<TaskCardProps> = ({tasks,setTasks, setIsModalOpen, onSe
         const id = e.target.id;
         const newTasks = tasks.filter((taskList) => taskList.id != id);
         setTasks(newTasks);
+        deleteTask(id);
     }
 
     const handleEditTask = (e: any): void => {

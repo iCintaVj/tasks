@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './TaskListCard.css';
 import Column from '../Column/Column.tsx';
-import { dummyColumns } from '../../data/initialData.ts';
 
 import { ColumnType, TaskListCardProps, TaskType } from '../../types/types.ts';
 import TaskListHeader from '../TaskListHeader/TaskListHeader.tsx';
@@ -23,7 +22,7 @@ const TaskListCard: React.FC<TaskListCardProps> = ({ id, name, taskLists, tasks,
         fetchColumns();
     }, []);
 
-    const [columns, setColumns] = useState([]);
+    const [columns, setColumns] = useState<ColumnType[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
 
