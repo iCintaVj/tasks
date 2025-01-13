@@ -2,11 +2,14 @@ import React, { useState, useRef } from 'react';
 import { SidePanelNavItemProps, TaskListType } from '../../types/types.ts';
 import './SidePanelNavItem.css';
 import { deleteTaskList, updateTaskList } from '../../data/dbData.ts';
+import { useAppContext } from '../../contexts/AppContext.tsx';
 
-const SidePanelNavItem: React.FC<SidePanelNavItemProps> = ({ id, name, taskLists, setTaskLists }) => {
+const SidePanelNavItem: React.FC<TaskListType> = ({ id, name}) => {
   const [newTitle, setNewTitle] = useState(name);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
+
+  const {taskLists, setTaskLists} = useAppContext();
 
   const handleEditClick = (e:any) => {
     setIsEditing(true);

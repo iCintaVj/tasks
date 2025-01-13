@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import './SidePanel.css';
-import { SidePanelProps, TaskListType } from '../../types/types.ts';
+import { TaskListType } from '../../types/types.ts';
 import SidePanelNavItem from '../SidePanelNavItem/SidePanelNavItem.tsx';
 import AddButton from '../AddButton/AddButton.jsx';
 import Logo from '../Logo/Logo.tsx';
 import { convertToDashSeparatedId } from '../../utils/helper.ts';
-import { createTaskList } from '../../data/dbData.ts';
+import { useAppContext } from '../../contexts/AppContext.tsx';
 
-const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, selectedTaskList, onSelectTaskList }) => {
+const SidePanel: React.FC = () => {
 
-  // Handler for selecting a task list
-  const handleSelect = (taskList: TaskListType) => {
-    onSelectTaskList(taskList);
-  };
+  const {taskLists, setTaskLists, createTaskList, selectedTaskList, setSelectedTaskList} = useAppContext();
 
   const handleAddTaskList = () => {
     if(taskLists.length >= 15){
@@ -25,7 +22,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, selected
     }
     taskLists.push(newTaskList);
     setTaskLists([...taskLists])
-    onSelectTaskList(newTaskList);
+    setSelectedTaskList(newTaskList);
     createTaskList(newTaskList);
   }
   
@@ -36,8 +33,8 @@ const SidePanel: React.FC<SidePanelProps> = ({ taskLists, setTaskLists, selected
         <h3>Task Lists</h3>
         <ul className="task-lists-ul">
           {taskLists.length >0 ?  taskLists.map((taskList) => (
-            <li key={taskList.name} className={`task-lists-li ${selectedTaskList === taskList ? 'selected' : ''}`} onClick={() => handleSelect(taskList)}>
-              <SidePanelNavItem {...taskList} taskLists={taskLists} setTaskLists={setTaskLists}/>
+            <li key={taskList.name} className={`task-lists-li ${selectedTaskList === taskList ? 'selected' : ''}`} onClick={() => setSelectedTaskList(taskList)}>
+              <SidePanelNavItem {...taskList}/>
             </li>
           )) : (
             <li key='empty-task-list' className='task-lists-li'>

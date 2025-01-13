@@ -1,69 +1,65 @@
 import React, { useState } from 'react';
 import './TaskModal.css';
-import { TaskModalProps, TaskType } from '../../types/types';
+import { TaskType } from '../../types/types';
 import { createTask, updateTask } from '../../data/dbData.ts';
+import { useAppContext } from '../../contexts/AppContext.tsx';
 
-const TaskModal: React.FC<TaskModalProps> = ({ task, onClose, taskListId, tasks, setTasks }) => {
-    const [taskName, setTaskName] = useState(task?.name || '');
-    const [description, setDescription] = useState(task?.description || undefined);
-    const [priority, setPriority] = useState<'High' | 'Medium' | 'Low'>(task?.priority || 'Medium');
-    const [dueDate, setDueDate] = useState(task?.dueDate || new Date().toISOString().split('T')[0]);
-    const [status, setStatus] = useState<'Todo' | 'In Progress' | 'Done'>(task?.status || 'Todo');
+const TaskModal: React.FC = () => {
 
-    // useEffect(() => {
-    //     if (task) {
-    //         setTaskName(task.name);
-    //         setDescription(task.description);
-    //         setPriority(task.priority);
-    //         setDueDate(task.dueDate);
-    //         setStatus(task.status);
-    //     } 
-        
-    // }, [task]);
+    const {selectedTaskList, selectedTask, setTasks, tasks, setSelectedTask, setModalOpen } = useAppContext();
+
+    const [taskName, setTaskName] = useState(selectedTask?.name || '');
+    const [description, setDescription] = useState(selectedTask?.description || undefined);
+    const [priority, setPriority] = useState<'High' | 'Medium' | 'Low'>(selectedTask?.priority || 'Medium');
+    const [dueDate, setDueDate] = useState(selectedTask?.dueDate || new Date().toISOString().split('T')[0]);
+    const [status, setStatus] = useState<'Todo' | 'In Progress' | 'Done'>(selectedTask?.status || 'Todo');
 
     const handleSave = () => {
-        const newTask: TaskType = {
-            id: (task?.id || Math.floor(Math.random() * 1000)) + '',
-            taskListId,
-            name: taskName,
-            description,
-            priority,
-            dueDate,
-            status,
-        };
+        try{
+            const newTask: TaskType = {
+                id: (selectedTask?.id || Math.floor(Math.random() * 1000)) + '',
+                taskListId : selectedTaskList.id,
+                name: taskName,
+                description,
+                priority,
+                dueDate,
+                status,
+            };
 
-        if (taskName === '' || dueDate === '') {
-            alert('Task Name and Due Date are required');
-            return;
-        }
+            if (taskName === '' || dueDate === '') {
+                alert('Task Name and Due Date are required');
+                return;
+            }
 
-        // Check if the task already exists
-        const taskIndex = tasks.findIndex((t) => t.id === newTask.id);
-
-        if (taskIndex > -1) {
-            // If the task exists, update it
-            const updatedTasks = [...tasks];
-            updatedTasks[taskIndex] = newTask;
-            setTasks(updatedTasks);
-            updateTask(newTask);
-        } else {
-            // If the task doesn't exist, add it
-            setTasks([...tasks, newTask]);
-            createTask(newTask);
+            // Check if the task already exists
+            const taskIndex = tasks.findIndex((t) => t.id === newTask.id);
+            if (taskIndex > -1) {
+                // If the task exists, update it
+                const updatedTasks = [...tasks];
+                updatedTasks[taskIndex] = newTask;
+                setTasks(updatedTasks);
+                updateTask(newTask);
+            } else {
+                // If the task doesn't exist, add it
+                setTasks([...tasks, newTask]);
+                createTask(newTask);
+            }   
+        } catch (error) {
+            console.log('Error saving task:', error);
         }
 
         onClose();
     };
 
-    console.log('TaskModal', task);
-
-    console.log('TaskModal', taskName, description, priority, dueDate, status);
-    
+    const onClose = () => {
+        setModalOpen(false);
+        setSelectedTask(null);
+    }
 
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>{task ? 'Edit Task' : 'Add Task'}</h2>
+                <h2>{selectedTask ? 'Edit Task' : 'Add Task'}</h2>
                 <input
                     type="text"
                     placeholder="Task Name"

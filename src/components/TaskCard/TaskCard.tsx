@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './TaskCard.css';
-import { TaskCardProps, TaskType } from '../../types/types.ts';
-import { deleteTask } from '../../data/dbData.ts';
+import {  TaskType } from '../../types/types.ts';
+import { useAppContext } from '../../contexts/AppContext.tsx';
 
-const TaskCard: React.FC<TaskCardProps> = ({tasks,setTasks, setIsModalOpen, onSelectTask, ...task}) => {
+const TaskCard: React.FC<TaskType> = ({...task}) => {
+
+    const {tasks, setTasks, deleteTask, setModalOpen, setSelectedTask} = useAppContext();
         
     const priorityClass = `priority-${task.priority.toLowerCase()}`;
 
@@ -15,8 +17,8 @@ const TaskCard: React.FC<TaskCardProps> = ({tasks,setTasks, setIsModalOpen, onSe
     }
 
     const handleEditTask = (e: any): void => {
-        onSelectTask(task);
-        setIsModalOpen(true);
+        setSelectedTask(task);
+        setModalOpen(true);
     };
 
     return (
