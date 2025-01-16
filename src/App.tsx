@@ -6,10 +6,11 @@ import TableView from './components/TableView/TableView.tsx';
 import TaskModal from './components/TaskModal/TaskModal.tsx';
 
 const App: React.FC = () => {
-  const { isTableView, isModalOpen } = useAppContext();
+  const { isTableView, isModalOpen, setIsTableView } = useAppContext();
   return (
     <div className="container">
       { isTableView ? <TableView /> : <KanbanBoard /> }
+      <button className='floating-button' onClick={()=>setIsTableView(!isTableView)}> {isTableView ? "Kanban View" : "Table View"} </button>
       {isModalOpen && <TaskModal/>}
     </div>
   );

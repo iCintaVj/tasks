@@ -14,7 +14,7 @@ const TaskModal: React.FC = () => {
     const [priority, setPriority] = useState<'High' | 'Medium' | 'Low'>(selectedTask?.priority || 'Medium');
     const [dueDate, setDueDate] = useState(selectedTask?.dueDate || new Date().toISOString().split('T')[0]);
     const [status, setStatus] = useState<'Todo' | 'In Progress' | 'Done'>(selectedTask?.status || 'Todo');
-    const [taskListId, setTaskListId] = useState<any>(selectedTask?.taskListId || '');
+    const [taskListId, setTaskListId] = useState<any>(selectedTask?.taskListId || taskLists[0].id);
 
     const handleSave = (e) => {
         try{
@@ -58,8 +58,6 @@ const TaskModal: React.FC = () => {
         setIsModalOpen(false);
         setSelectedTask(null);
     }
-
-    console.log(taskListId);    
 
     return (
         <div className="modal-overlay">

@@ -28,7 +28,7 @@ export type AppContextType = {
   selectedTaskList: TaskListType;
   setSelectedTaskList: (taskList: TaskListType) => void;
   isTableView: boolean;
-  setTableView: (isTableView: boolean) => void;
+  setIsTableView: (isTableView: boolean) => void;
 };
 
 export type TasksContextType = {
