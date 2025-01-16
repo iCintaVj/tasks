@@ -5,7 +5,7 @@ import { useAppContext } from '../../contexts/AppContext.tsx';
 
 const TaskCard: React.FC<TaskType> = ({...task}) => {
 
-    const {tasks, setTasks, deleteTask, setModalOpen, setSelectedTask} = useAppContext();
+    const {tasks, setTasks, deleteTask, setIsModalOpen, setSelectedTask} = useAppContext();
         
     const priorityClass = `priority-${task.priority.toLowerCase()}`;
 
@@ -18,7 +18,7 @@ const TaskCard: React.FC<TaskType> = ({...task}) => {
 
     const handleEditTask = (e: any): void => {
         setSelectedTask(task);
-        setModalOpen(true);
+        setIsModalOpen(true);
     };
 
     return (

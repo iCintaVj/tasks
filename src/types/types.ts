@@ -17,7 +17,7 @@ export type AppContextType = {
   selectedTask : TaskType | null;
   setSelectedTask: (task: TaskType | null) => void;
   isModalOpen: boolean;
-  setModalOpen: (isModalOpen: boolean) => void;
+  setIsModalOpen: (isModalOpen: boolean) => void;
   columns: string[];
   setColumns : (columns: string[]) => void;
   taskLists: TaskListType[];
@@ -27,6 +27,8 @@ export type AppContextType = {
   updateTaskList: (taskId: TaskListType) => void;
   selectedTaskList: TaskListType;
   setSelectedTaskList: (taskList: TaskListType) => void;
+  isTableView: boolean;
+  setTableView: (isTableView: boolean) => void;
 };
 
 export type TasksContextType = {
@@ -41,7 +43,7 @@ export type TasksContextType = {
 
 export type ModalContextType = {
   isModalOpen: boolean;
-  setModalOpen: (isModalOpen: boolean) => void;
+  setIsModalOpen: (isModalOpen: boolean) => void;
 }
 
 export type TaskCardProps = TaskType & {

@@ -5,10 +5,10 @@ import { ModalContextType } from '../types/types.ts';
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider =({ children }: { children: ReactNode }) => {
-    const [isModalOpen, setModalOpen] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     return (
-        <ModalContext.Provider value={{ isModalOpen, setModalOpen}}>
+        <ModalContext.Provider value={{ isModalOpen, setIsModalOpen}}>
             {children}
         </ModalContext.Provider>
     );

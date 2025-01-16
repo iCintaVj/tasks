@@ -14,9 +14,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     
     const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
 
-    const [isModalOpen, setModalOpen] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const [columns, setColumns] = useState<string[]>([]);
+
+    const [isTableView, setIsTableView] = useState(true);
 
     useEffect(() => {
         const fetchTaskList = async () => {
@@ -62,7 +64,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }, [taskLists, selectedTaskList]);
 
     return (
-        <AppContext.Provider value={ { taskLists, setTaskLists, selectedTaskList, setSelectedTaskList, tasks, setTasks, selectedTask, setSelectedTask, isModalOpen, setModalOpen, columns, setColumns, createTask, deleteTask, updateTask, createTaskList, deleteTaskList, updateTaskList } }>
+        <AppContext.Provider value={ { isTableView, setIsTableView, taskLists, setTaskLists, selectedTaskList, setSelectedTaskList, tasks, setTasks, selectedTask, setSelectedTask, isModalOpen, setIsModalOpen, columns, setColumns, createTask, deleteTask, updateTask, createTaskList, deleteTaskList, updateTaskList } }>
             {children}
         </AppContext.Provider>
     );

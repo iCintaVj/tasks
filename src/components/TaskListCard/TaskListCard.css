@@ -1,10 +1,4 @@
-.task-list-container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-y: hidden; /* Prevent the whole column from scrolling */
-  }
+
   
   .task-list-items {
     list-style: none;
@@ -37,10 +31,6 @@
     text-align: center;
   }
   @media (max-width: 600px) {
-    .task-list-container {
-      padding: 10px;
-    }
-
     .task-list-item {
       padding: 10px;
       font-size: 16px;

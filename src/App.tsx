@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import SidePanel from './components/SidePanel/SidePanel.tsx';
-import TaskListCard from './components/TaskListCard/TaskListCard.tsx';
+import React from 'react';
 import './App.css';
 import { useAppContext } from './contexts/AppContext.tsx';
+import KanbanBoard from './components/KanbanBoard/KanbanBoard.jsx';
+import TableView from './components/TableView/TableView.tsx';
+import SidePanel from './components/SidePanel/SidePanel.tsx';
+import TaskListHeader from './components/TaskListHeader/TaskListHeader.tsx';
+import TaskModal from './components/TaskModal/TaskModal.tsx';
 
 const App: React.FC = () => {
-
-  const { taskLists} = useAppContext();
-
+  const { isTableView, selectedTaskList, isModalOpen } = useAppContext();
   return (
     <div className="container">
       <div className="left-section">
         <SidePanel key="side-panel" />
       </div>
-      {taskLists.length > 0 ?
-        <div className="right-section">
-          <TaskListCard key="task-list-card" />
-        </div> :
-        <span className='empty-task-list'> No Task Lists Found</span>}
+      <div className="right-section">
+        <TaskListHeader key={selectedTaskList.id}/>
+        <div className="task-list-container" id={selectedTaskList.id}>
+          { isTableView ? <TableView /> : <KanbanBoard /> }
+        </div>
+      </div>
+      {isModalOpen && <TaskModal/>}
     </div>
   );
 };

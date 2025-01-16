@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './TaskListCard.css';
 import Column from '../Column/Column.tsx';
 
-import TaskListHeader from '../TaskListHeader/TaskListHeader.tsx';
-import TaskModal from '../TaskModal/TaskModal.tsx';
 import { getColumns } from '../../data/dbData.ts';
 import { dummyColumns } from '../../data/initialData.ts';
 import { useAppContext } from '../../contexts/AppContext.tsx';
 
 const TaskListCard: React.FC = () => {
 
-    const { taskLists, selectedTaskList,  columns, setColumns, isModalOpen} = useAppContext();
+    const { taskLists, selectedTaskList,  columns, setColumns} = useAppContext();
 
     useEffect(() => {
         const fetchColumns = async () => {
@@ -27,8 +25,6 @@ const TaskListCard: React.FC = () => {
     }, []);
 
     return (
-        <div className="task-list-container" id={selectedTaskList.id}>
-            <TaskListHeader key={selectedTaskList.id}/>
             <ul className='task-list-items'>
                 {taskLists?.some((taskList => taskList.id === selectedTaskList.id)) ? columns.map((column) => (
                     <li key={column}>
@@ -40,8 +36,6 @@ const TaskListCard: React.FC = () => {
                     </li>
                 )}
             </ul>
-            {isModalOpen && <TaskModal/>}
-        </div>
     );
 };
 

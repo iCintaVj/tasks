@@ -6,7 +6,7 @@ import { useAppContext } from '../../contexts/AppContext.tsx';
 
 const TaskModal: React.FC = () => {
 
-    const {selectedTaskList, selectedTask, setTasks, tasks, setSelectedTask, setModalOpen } = useAppContext();
+    const {selectedTaskList, selectedTask, setTasks, tasks, setSelectedTask, setIsModalOpen } = useAppContext();
 
     const [taskName, setTaskName] = useState(selectedTask?.name || '');
     const [description, setDescription] = useState(selectedTask?.description || undefined);
@@ -52,7 +52,7 @@ const TaskModal: React.FC = () => {
     };
 
     const onClose = () => {
-        setModalOpen(false);
+        setIsModalOpen(false);
         setSelectedTask(null);
     }
 
