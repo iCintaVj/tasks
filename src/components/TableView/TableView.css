@@ -1,3 +1,70 @@
 .table-container {
-    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    box-shadow: rgba(211, 159, 159, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    align-self: center;
+}
+
+.table-header-container {
+    text-align: center;
+}
+
+.table-heading {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.table-options-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-options-left, .table-options-right {
+    display: flex;
+    align-items: center;
+}
+
+.total-tasks-indicator {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.table-search-box {
+    display: flex;
+    align-items: center;
+}
+
+.table-search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.table-search-button, .table-filter-button, .table-add-task-button, .prev-button, .next-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.table-search-button:hover, .table-filter-button:hover, .table-add-task-button:hover, .prev-button:hover, .next-button:hover {
+    background-color: #0056b3;
+}
+
+.total-pages-indicator {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.prev-button:disabled, .next-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

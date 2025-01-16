@@ -1,0 +1,38 @@
+.task-list-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: hidden;
+    /* Prevent the whole column from scrolling */
+}
+
+.left-section {
+    flex: 1;
+    max-width: 20%;
+    background-color: #f4f4f4;
+}
+
+.right-section {
+    flex: 3;
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section {
+        max-width: 100%;
+    }
+
+    .right-section {
+        max-width: 100%;
+    }
+
+    .task-list-container {
+        padding: 10px;
+    }
+}
