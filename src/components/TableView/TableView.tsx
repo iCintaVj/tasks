@@ -4,7 +4,7 @@ import './TableView.css';
 import Table from '../Table/Table.tsx';
 
 const TableView: React.FC = () => {
-    const { tasks } = useAppContext();
+    const { tasks, setSelectedTask, setIsModalOpen } = useAppContext();
     const tasksPerPage = 10;
     const totalPages = Math.ceil(tasks.length / tasksPerPage);
     const [currentPage, setCurrentPage] = useState(0);
@@ -19,6 +19,11 @@ const TableView: React.FC = () => {
         setCurrentPage(currentPage + 1);
     }
 
+    const onAddTask = () => {
+        setSelectedTask(null);
+        setIsModalOpen(true);
+    }
+
     return <div className="table-container">
         <div className='table-header-container'><h1 className='table-heading'>Tasks List</h1></div>
         <div className='table-options-container'>
@@ -26,12 +31,9 @@ const TableView: React.FC = () => {
                 <strong className='total-tasks-indicator'>Total tasks ({tasks.length})</strong>
             </div>
             <div className='table-options-right'>
-                <div className='table-search-box'>
-                    <input className='table-search-input' type='text' placeholder='Search by Task Name' />
-                    <button className='table-search-button'>Search</button>
-                </div>
+                <input className='table-search-input' type='text' placeholder='Search by Task Name' />
                 <button className='table-filter-button'>Filter</button>
-                <button className='table-add-task-button'>Add Task</button>
+                <button className='table-add-task-button' onClick={onAddTask}>Add Task</button>
             </div>
         </div>
 

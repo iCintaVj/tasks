@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import './TaskModal.css';
-import { TaskType } from '../../types/types';
-import { createTask, updateTask } from '../../data/dbData.ts';
+import { TaskListType, TaskType } from '../../types/types';
+import { createTask, createTaskList, updateTask } from '../../data/dbData.ts';
 import { useAppContext } from '../../contexts/AppContext.tsx';
+import { convertToDashSeparatedId, getTaskListNameFromId } from '../../utils/helper.ts';
 
 const TaskModal: React.FC = () => {
 
-    const {selectedTaskList, selectedTask, setTasks, tasks, setSelectedTask, setIsModalOpen } = useAppContext();
+    const {taskLists, selectedTask, setTasks, tasks, setSelectedTask, setIsModalOpen } = useAppContext();
 
     const [taskName, setTaskName] = useState(selectedTask?.name || '');
     const [description, setDescription] = useState(selectedTask?.description || undefined);
     const [priority, setPriority] = useState<'High' | 'Medium' | 'Low'>(selectedTask?.priority || 'Medium');
     const [dueDate, setDueDate] = useState(selectedTask?.dueDate || new Date().toISOString().split('T')[0]);
     const [status, setStatus] = useState<'Todo' | 'In Progress' | 'Done'>(selectedTask?.status || 'Todo');
+    const [taskListId, setTaskListId] = useState<any>(selectedTask?.taskListId || '');
 
-    const handleSave = () => {
+    const handleSave = (e) => {
         try{
+            e.preventDefault();
             const newTask: TaskType = {
                 id: (selectedTask?.id || Math.floor(Math.random() * 1000)) + '',
-                taskListId : selectedTaskList.id,
+                taskListId : taskListId, 
                 name: taskName,
                 description,
                 priority,
@@ -56,6 +59,8 @@ const TaskModal: React.FC = () => {
         setSelectedTask(null);
     }
 
+    console.log(taskListId);    
+
     return (
         <div className="modal-overlay">
             <div className="modal-content">
@@ -88,6 +93,11 @@ const TaskModal: React.FC = () => {
                     <option value="Todo">Todo</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Done">Done</option>
+                </select>
+                <select value={taskListId} onChange={(e) => setTaskListId(e.target.value)} autoComplete="off">
+                    {taskLists.map((taskList) => (
+                        <option key={taskList.id} value={taskList.id}>{getTaskListNameFromId(taskList.id, taskLists)}</option>
+                    ))}
                 </select>
                 <div className="modal-actions">
                     <button onClick={handleSave}>Save</button>
