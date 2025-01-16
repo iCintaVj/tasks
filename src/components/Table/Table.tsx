@@ -3,13 +3,11 @@ import { useAppContext } from '../../contexts/AppContext.tsx';
 import { getTaskListNameFromId } from '../../utils/helper.ts';
 import './Table.css'
 import { TaskType } from '../../types/types.ts';
-import { ReactComponent as EditButton } from '../../resources/edit.svg'
-import { ReactComponent as DeleteButton } from '../../resources/delete.svg'
 import { ReactComponent as OptionButton } from '../../resources/option.svg'
 import { deleteTask } from '../../data/dbData.ts';
 
 
-const Table: React.FC<any> = ({ currentPage, tasksPerPage }) => {
+const Table: React.FC<any> = ({ currentPage, tasksPerPage , taskContainsFilter}) => {
     const { tasks, taskLists, setSelectedTask, setIsModalOpen, selectedTask, setTasks} = useAppContext();
     const columns = ['S.No', 'Task Name', 'Catagory', 'Description', 'Priority', 'Due Date', 'Status', 'Action'];
 
@@ -63,7 +61,7 @@ const Table: React.FC<any> = ({ currentPage, tasksPerPage }) => {
                 <tbody>
                     {
                         tasks.map((task, index) =>
-                            (index + 1 > currentPage * tasksPerPage && index + 1 <= (currentPage * tasksPerPage) + tasksPerPage) &&
+                            (index + 1 > currentPage * tasksPerPage && index + 1 <= (currentPage * tasksPerPage) + tasksPerPage) && task.name.toLowerCase().includes(taskContainsFilter.toLowerCase()) &&
                             <tr key={task.id || index}>
                                 <td>{index + 1}</td>
                                 <td>{task.name}</td>
