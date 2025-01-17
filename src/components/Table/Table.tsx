@@ -7,7 +7,7 @@ import { ReactComponent as OptionButton } from '../../resources/option.svg'
 import { deleteTask } from '../../data/dbData.ts';
 
 
-const Table: React.FC<any> = ({ currentPage, tasksPerPage , taskContainsFilter}) => {
+const Table: React.FC<any> = ({ currentPage, tasksPerPage , taskContainsFilter, statusFilter, priorityFilter, catagoryFilter}) => {
     const { tasks, taskLists, setSelectedTask, setIsModalOpen, selectedTask, setTasks} = useAppContext();
     const columns  = ['S.No', 'Name', 'Catagory', 'Description', 'Priority', 'Due Date', 'Status', 'Action'];
 
@@ -78,6 +78,7 @@ const Table: React.FC<any> = ({ currentPage, tasksPerPage , taskContainsFilter})
       };
 
       useEffect(() => {
+        
         const handleOutsideClick = (e: MouseEvent) => {
           if (
             contextMenuRef.current &&
@@ -102,7 +103,11 @@ const Table: React.FC<any> = ({ currentPage, tasksPerPage , taskContainsFilter})
                 </thead>
                 <tbody>
                     {
-                        sortedTasks.filter((task) => task.name.toLowerCase().includes(taskContainsFilter.toLowerCase())).map((task, index) =>
+                        sortedTasks.filter((task) => task.name.toLowerCase().includes(taskContainsFilter.toLowerCase()))
+                                   .filter((task) => priorityFilter.includes(task.priority))
+                                   .filter((task) => statusFilter.includes(task.status))  
+                                   .filter((task) => catagoryFilter.includes(getTaskListNameFromId(task.taskListId, taskLists)))
+                                   .map((task, index) =>
                             (index + 1 > currentPage * tasksPerPage && index + 1 <= (currentPage * tasksPerPage) + tasksPerPage) &&
                             <tr key={task.id || index}>
                                 <td>{index + 1}</td>
